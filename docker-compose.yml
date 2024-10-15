@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13
+    container_name: postgres_container
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: guest_db
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./app/init.sql:/docker-entrypoint-initdb.d/1-init.sql
+    ports:
+      - '5432:5432'
+
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: php_app_container
+    volumes:
+      - ./app:/var/www/html
+    ports:
+      - '8000:80'
+    depends_on:
+      - db
+
+volumes:
+  db_data:
