@@ -29,7 +29,7 @@
 1. **Клонируйте репозиторий:**
 
    ```bash
-   git clone https://github.com/yourusername/guest_service.git
+   git clone https://github.com/PTimurV/guest_service.git
    cd guest_service
    docker-compose build
    docker-compose up -d
